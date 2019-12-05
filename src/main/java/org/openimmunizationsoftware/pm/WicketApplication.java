@@ -5,7 +5,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 /**
  * Application object for your web application. If you want to run this application without deploying, run the Start class.
  * 
- * @see org.openimmunizationsoftware.pm.Start#main(String[])
+ * @see org.openimmunizationsoftware.pm.StartPatientMatching#main(String[])
  */
 public class WicketApplication extends WebApplication
 {    	

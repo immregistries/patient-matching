@@ -65,14 +65,7 @@ public class CentralServlet extends HomeServlet
     resp.setContentType("text/html");
     PrintWriter out = new PrintWriter(resp.getOutputStream());
     try {
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Central Servlet</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user, "CentralServlet");
+      HomeServlet.doHeader(out, user, null);
       out.println("    <h1>Central Servlet</h1>");
 
       if (dataStoreDir != null) {
@@ -137,6 +130,8 @@ public class CentralServlet extends HomeServlet
       } else {
         out.println("<p>Local data store is not configure properly so central servlet is not operating.</p>");
       }
+      HomeServlet.doFooter(out, user);
+
     } catch (Exception e) {
       out.print("<pre>");
       e.printStackTrace(out);

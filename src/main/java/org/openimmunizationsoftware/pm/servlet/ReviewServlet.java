@@ -61,15 +61,7 @@ public class ReviewServlet extends HomeServlet
       }
       MatchSet matchSetSelected = (MatchSet) session.getAttribute(TestSetServlet.ATTRIBUTE_MATCH_SET);
 
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Match Patient</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user, "ReviewServlet");
-      out.println("    <h1>Review</h1>");
+      HomeServlet.doHeader(out, user, null);      out.println("    <h1>Review</h1>");
       Map<String, List<MatchItem>> signatureMap = (Map<String, List<MatchItem>>) session
           .getAttribute(TestSetServlet.ATTRIBUTE_SIGNATURE_MAP);
       if (signatureMap == null) {
@@ -177,8 +169,8 @@ public class ReviewServlet extends HomeServlet
           out.println("<p>None found</p>");
         }
       }
-      out.println("  </body>");
-      out.println("</html>");
+      HomeServlet.doFooter(out, user);
+
     } catch (Exception e) {
       e.printStackTrace(out);
     }

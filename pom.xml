@@ -4,7 +4,7 @@
 	<groupId>org.openimmunizationsoftware.pm</groupId>
 	<artifactId>patientmatch</artifactId>
 	<packaging>war</packaging>
-	<version>1.5</version>
+	<version>1.6.01</version>
 	<!-- TODO project name  -->
 	<name>quickstart</name>
 	<description></description>
@@ -37,27 +37,28 @@
 			<version>${wicket.version}</version>
 		</dependency>
 		-->
-         <dependency>
-	       <groupId>mysql</groupId>
-	       <artifactId>mysql-connector-java</artifactId>
-	       <version>5.1.6</version>
-         </dependency>
-         
-         		<dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate</artifactId>
-			<version>3.6.0.Beta2</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.8.Final</version>
 			<type>pom</type>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.6-Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>3.3.1.GA</version>
+			<version>4.3.8.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.45</version>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
 		</dependency>
 		
 		<dependency>
@@ -77,11 +78,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.16</version>
 		</dependency>
-		<!--  mvn install:install-file -Dfile=secondstring-20060615.jar -Dpackaging=jar\ -DgroupId=com.wcohen -DartifactId=ss -Dversion=20060615 -->
+		<!--  mvn install:install-file -Dfile=secondstring-20191126.jar -Dpackaging=jar\ -DgroupId=com.wcohen.ss -DartifactId=secondstring -Dversion=20191126 -->
 		<dependency>
-			<groupId>com.wcohen</groupId>
-			<artifactId>ss</artifactId>
-			<version>20060615</version>
+			<groupId>com.wcohen.ss</groupId>
+			<artifactId>secondstring</artifactId>
+			<version>20191126</version>
 		</dependency>
 
 		<!--  JUNIT DEPENDENCY FOR TESTING -->
@@ -140,12 +141,31 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<optimize>true</optimize>
 					<debug>true</debug>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-a-jar-package</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>embed</classifier>
+							<includes>
+								<include>**</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>			
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>

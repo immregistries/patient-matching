@@ -35,11 +35,7 @@ public class DownloadHL7Servlet extends HomeServlet
     HttpSession session = req.getSession(true);
     User user = (User) session.getAttribute(TestSetServlet.ATTRIBUTE_USER);
     try {
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Download HL7 Servlet</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
+      HomeServlet.doHeader(out, user, null);
       out.println("    <script>");
       out.println("      function toggleLayer(whichLayer) ");
       out.println("      {");
@@ -56,9 +52,6 @@ public class DownloadHL7Servlet extends HomeServlet
       out.println("        vis.display = (vis.display == '' || vis.display == 'block') ? 'none' : 'block';");
       out.println("      }");
       out.println("    </script>");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user);
       out.println("    <h1>Download HL7 Servlet</h1>");
 
       SessionFactory factory = getSessionFactory();
@@ -89,10 +82,8 @@ public class DownloadHL7Servlet extends HomeServlet
 
       dataSession.close();
 
-      out.println("    </pre>");
-      out.println("  </body>");
-      out.println("</fhtml>");
-    } catch (Exception e) {
+      HomeServlet.doFooter(out, user);
+   } catch (Exception e) {
       out.print("<pre>");
       e.printStackTrace(out);
       out.print("</pre>");

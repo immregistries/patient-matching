@@ -30,7 +30,7 @@
 		<servlet-class>org.openimmunizationsoftware.pm.servlet.TestSetUploadServlet</servlet-class>
 		<init-param>
             <param-name>uploadDir</param-name>
-            <param-value>C:\data\Dropbox (Personal)\work\client\MA MIIS\Matching\data-temp</param-value>
+            <param-value>C:\Users\N. Bunker\Dropbox (Personal)\work\client\MA MIIS\Matching\data-temp</param-value>
         </init-param>
 	</servlet>
 	<servlet>
@@ -50,7 +50,7 @@
 		<servlet-class>org.openimmunizationsoftware.pm.servlet.CentralServlet</servlet-class>
 		<init-param>
             <param-name>dataStoreDir</param-name>
-            <param-value>C:\data\Dropbox (Personal)\work\client\MA MIIS\Matching\data</param-value>
+            <param-value>C:\Users\N. Bunker\Dropbox (Personal)\work\client\MA MIIS\Matching\data</param-value>
         </init-param>
 	</servlet>
 	

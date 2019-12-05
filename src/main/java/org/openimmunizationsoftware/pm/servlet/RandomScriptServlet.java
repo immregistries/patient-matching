@@ -3,13 +3,11 @@ package org.openimmunizationsoftware.pm.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.openimmunizationsoftware.pm.model.Patient;
 import org.openimmunizationsoftware.pm.model.PatientCompare;
 import org.openimmunizationsoftware.pm.model.User;
@@ -24,27 +22,24 @@ import org.openimmunizationsoftware.random.Typest;
  * @author Nathan Bunker
  * 
  */
-public class RandomScriptServlet extends HomeServlet
-{
+public class RandomScriptServlet extends HomeServlet {
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     doPost(req, resp);
   }
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
     response.setContentType("text/html");
     PrintWriter out = new PrintWriter(response.getOutputStream());
     HttpSession session = request.getSession(true);
     User user = (User) session.getAttribute(TestSetServlet.ATTRIBUTE_USER);
     try {
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Generate Weights</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
+      HomeServlet.doHeader(out, user, null);
       out.println("    <script>");
       out.println("      function toggleLayer(whichLayer) ");
       out.println("      {");
@@ -56,14 +51,14 @@ public class RandomScriptServlet extends HomeServlet
       out.println("        else if (document.layers) ");
       out.println("          elem = document.layers[whichLayer]");
       out.println("        vis = elem.style;");
-      out.println("        if (vis.display == '' && elem.offsetWidth != undefined && elem.offsetHeight != undefined) ");
-      out.println("          vis.display = (elem.offsetWidth != 0 && elem.offsetHeight != 0) ? 'block' : 'none';");
-      out.println("        vis.display = (vis.display == '' || vis.display == 'block') ? 'none' : 'block';");
+      out.println(
+          "        if (vis.display == '' && elem.offsetWidth != undefined && elem.offsetHeight != undefined) ");
+      out.println(
+          "          vis.display = (elem.offsetWidth != 0 && elem.offsetHeight != 0) ? 'block' : 'none';");
+      out.println(
+          "        vis.display = (vis.display == '' || vis.display == 'block') ? 'none' : 'block';");
       out.println("      }");
       out.println("    </script>");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user);
       out.println("    <h1>Random Patient Scripts</h1>");
 
       out.println("    <table border=\"1\" cellspacing=\"0\">");
@@ -82,10 +77,13 @@ public class RandomScriptServlet extends HomeServlet
       PrintWriter scriptOut = new PrintWriter(stringWriter);
       int count = 0;
       for (Typest.Condition condition : Typest.Condition.values()) {
-        if (condition == Typest.Condition.BIRTH_MULTIPLE_MISSING || condition == Typest.Condition.BIRTH_ORDER_MISSING
+        if (condition == Typest.Condition.BIRTH_MULTIPLE_MISSING
+            || condition == Typest.Condition.BIRTH_ORDER_MISSING
             || condition == Typest.Condition.SSN_MISSING || condition == Typest.Condition.SSN_SHARED
-            || condition == Typest.Condition.SSN_TYPO || condition == Typest.Condition.MEDICAID_NUM_MISSING
-            || condition == Typest.Condition.MEDICAID_NUM_SHARED || condition == Typest.Condition.MEDICAID_NUM_TYPO
+            || condition == Typest.Condition.SSN_TYPO
+            || condition == Typest.Condition.MEDICAID_NUM_MISSING
+            || condition == Typest.Condition.MEDICAID_NUM_SHARED
+            || condition == Typest.Condition.MEDICAID_NUM_TYPO
             || condition == Typest.Condition.SHOT_HISTORY_INCOMPLETE
             || condition == Typest.Condition.SHOT_HISTORY_MISSING) {
           continue;
@@ -152,18 +150,22 @@ public class RandomScriptServlet extends HomeServlet
             int highScore = 14;
             int lowScore = 8;
             // Medium first
-            if (condition == Typest.Condition.ADDRESS_CHANGED || condition == Typest.Condition.ADDRESS_TYPO
+            if (condition == Typest.Condition.ADDRESS_CHANGED
+                || condition == Typest.Condition.ADDRESS_TYPO
                 || condition == Typest.Condition.ADDRESS_STREET_MISSING
-                || condition == Typest.Condition.FIRST_NAME_CHANGED || condition == Typest.Condition.PHONE_CHANGED
+                || condition == Typest.Condition.FIRST_NAME_CHANGED
+                || condition == Typest.Condition.PHONE_CHANGED
                 || condition == Typest.Condition.SSN_TYPO) {
               highScore = 15;
               lowScore = 10;
             }
             // High
-            if (condition == Typest.Condition.DOB_VALUE_SWAPPED || condition == Typest.Condition.DOB_OFF_BY_1
+            if (condition == Typest.Condition.DOB_VALUE_SWAPPED
+                || condition == Typest.Condition.DOB_OFF_BY_1
                 || condition == Typest.Condition.MEDICAID_NUM_SHARED
                 || condition == Typest.Condition.MOTHERS_MAIDEN_NAME_CHANGED
-                || condition == Typest.Condition.MRN_SHARED_MRN || condition == Typest.Condition.SSN_SHARED
+                || condition == Typest.Condition.MRN_SHARED_MRN
+                || condition == Typest.Condition.SSN_SHARED
                 || condition == Typest.Condition.BIRTH_MULITPLE_MISSING_FOR_TWIN
                 || condition == Typest.Condition.BIRTH_ORDER_MISSING_FOR_TWIN) {
               highScore = 18;
@@ -214,11 +216,13 @@ public class RandomScriptServlet extends HomeServlet
             }
             out.println("      </tr>");
             out.flush();
-            scriptOut.println("TEST: S-" + count + ":" + condition + ":" + typeSelected1 + "-" + typeSelected2);
+            scriptOut.println(
+                "TEST: S-" + count + ":" + condition + ":" + typeSelected1 + "-" + typeSelected2);
             scriptOut.println("EXPECT: " + expectedResultB);
             scriptOut.println("PATIENT A: " + patientA.getValues());
             scriptOut.println("PATIENT B: " + patientB.getValues());
-            scriptOut.println("TEST: D-" + count + ":" + condition + ":" + typeSelected1 + "-" + typeSelected2);
+            scriptOut.println(
+                "TEST: D-" + count + ":" + condition + ":" + typeSelected1 + "-" + typeSelected2);
             scriptOut.println("EXPECT: " + expectedResultC);
             scriptOut.println("PATIENT A: " + patientA.getValues());
             scriptOut.println("PATIENT B: " + patientC.getValues());
@@ -232,8 +236,8 @@ public class RandomScriptServlet extends HomeServlet
       out.println("    <pre>");
       out.print(stringWriter.toString());
       out.println("    </pre>");
-      out.println("  </body>");
-      out.println("</html>");
+      HomeServlet.doFooter(out, user);
+
     } catch (Exception e) {
       out.println("<pre>");
       e.printStackTrace(out);

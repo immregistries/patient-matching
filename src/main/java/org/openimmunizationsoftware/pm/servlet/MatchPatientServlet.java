@@ -8,13 +8,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.hibernate.Session;
 import org.openimmunizationsoftware.pm.matchers.AggregateMatchNode;
 import org.openimmunizationsoftware.pm.matchers.MatchNode;
@@ -30,11 +28,11 @@ import org.openimmunizationsoftware.pm.model.User;
  * @author Nathan Bunker
  * 
  */
-public class MatchPatientServlet extends HomeServlet
-{
+public class MatchPatientServlet extends HomeServlet {
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     resp.setContentType("text/html");
     PrintWriter out = new PrintWriter(resp.getOutputStream());
     HttpSession session = req.getSession(true);
@@ -51,7 +49,8 @@ public class MatchPatientServlet extends HomeServlet
       }
 
       if (session.getAttribute(TestMatchingServlet.ATTRIBUTE_CREATURE_SCRIPT) != null) {
-        patientCompare.readScript((String) session.getAttribute(TestMatchingServlet.ATTRIBUTE_CREATURE_SCRIPT));
+        patientCompare.readScript(
+            (String) session.getAttribute(TestMatchingServlet.ATTRIBUTE_CREATURE_SCRIPT));
       }
 
       String testId = req.getParameter("testId");
@@ -93,14 +92,7 @@ public class MatchPatientServlet extends HomeServlet
           patientCompare.setPatientB(new Patient(patientBValues));
         }
       }
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Match Patient</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user, "MatchPatientServlet");
+      HomeServlet.doHeader(out, user, null);
       out.println("    <h1>Match Patient</h1>");
       out.println("    <form action=\"MatchPatientServlet\" method=\"POST\"> ");
       out.println("    <table>");
@@ -110,11 +102,14 @@ public class MatchPatientServlet extends HomeServlet
       if (!description.equals("")) {
         out.println("      <tr><td>Description</td><td>" + description + "</td></tr>");
       }
-      out.println("      <tr><td>Patient A</td><td><input type=\"text\" name=\"patientAValues\" value=\""
-          + (patientAValues == null ? "" : patientAValues) + "\" size=\"60\"></td></tr>");
-      out.println("      <tr><td>Patient B</td><td><input type=\"text\" name=\"patientBValues\" value=\""
-          + (patientBValues == null ? "" : patientBValues) + "\" size=\"60\"></td></tr>");
-      out.println("      <tr><td colspan=\"2\" align=\"right\"><input type=\"submit\" name=\"submit\" value=\"Submit\"></td></tr>");
+      out.println(
+          "      <tr><td>Patient A</td><td><input type=\"text\" name=\"patientAValues\" value=\""
+              + (patientAValues == null ? "" : patientAValues) + "\" size=\"60\"></td></tr>");
+      out.println(
+          "      <tr><td>Patient B</td><td><input type=\"text\" name=\"patientBValues\" value=\""
+              + (patientBValues == null ? "" : patientBValues) + "\" size=\"60\"></td></tr>");
+      out.println(
+          "      <tr><td colspan=\"2\" align=\"right\"><input type=\"submit\" name=\"submit\" value=\"Submit\"></td></tr>");
       out.println("    </table>");
 
       Set<String> allFieldsSet = new HashSet<String>();
@@ -166,36 +161,39 @@ public class MatchPatientServlet extends HomeServlet
           + printScore(notMatch.weightScore(patientCompare)) + "</tr>");
       out.println("      <tr><td>Suspect Twin</td><td>" + twin.hasSignal(patientCompare) + "</td>"
           + printScore(twin.weightScore(patientCompare)) + "</tr>");
-      out.println("      <tr><td>Missing Data</td><td>" + missing.hasSignal(patientCompare) + "</td>"
-          + printScore(missing.weightScore(patientCompare)) + "</tr>");
+      out.println("      <tr><td>Missing Data</td><td>" + missing.hasSignal(patientCompare)
+          + "</td>" + printScore(missing.weightScore(patientCompare)) + "</tr>");
       if (patientCompare.getResult().equals("Match")) {
-        out.println("      <tr><td>Result</td><td class=\"pass\" colspan=\"2\">" + patientCompare.getResult()
-            + "</td></tr>");
+        out.println("      <tr><td>Result</td><td class=\"pass\" colspan=\"2\">"
+            + patientCompare.getResult() + "</td></tr>");
       } else {
-        out.println("      <tr><td>Result</td><td class=\"fail\" colspan=\"2\">" + patientCompare.getResult()
-            + "</td></tr>");
+        out.println("      <tr><td>Result</td><td class=\"fail\" colspan=\"2\">"
+            + patientCompare.getResult() + "</td></tr>");
       }
       out.println("    </table>");
       out.println("    <br>");
       {
         out.println("<table border=\"1\" cellspacing=\"0\">");
         out.println("<tr><td valign=\"top\">Match</td>");
-        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), match, "match");
+        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), match,
+            "match");
         out.println("    </tr>");
         out.println("<tr><td valign=\"top\">Not a Match</td>");
-        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), notMatch, "notmatch");
+        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(),
+            notMatch, "notmatch");
         out.println("    </tr>");
         out.println("<tr><td valign=\"top\">Twin</td>");
-        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), twin, "twin");
+        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), twin,
+            "twin");
         out.println("    </tr>");
         out.println("<tr><td valign=\"top\">Missing</td>");
-        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), missing, "missing");
+        printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), missing,
+            "missing");
         out.println("    </tr>");
         out.println("    </table>");
       }
       out.println("    </form>");
-      out.println("  </body>");
-      out.println("</html>");
+      HomeServlet.doFooter(out, user);
     } catch (Exception e) {
       e.printStackTrace(out);
     }
@@ -223,7 +221,8 @@ public class MatchPatientServlet extends HomeServlet
     }
   }
 
-  private void printAggregateNode(PrintWriter out, Patient patientA, Patient patientB, MatchNode node, String name) {
+  private void printAggregateNode(PrintWriter out, Patient patientA, Patient patientB,
+      MatchNode node, String name) {
     DecimalFormat df = new DecimalFormat("0.000");
     out.println("<td>");
     if (node instanceof AggregateMatchNode) {
@@ -236,11 +235,12 @@ public class MatchPatientServlet extends HomeServlet
         out.println("<tr>");
         out.println("<td valign=\"top\">" + childNode.getMatchName() + "</td>");
         if (childNode.isEnabled()) {
-          out.println("<td valign=\"top\">" + df.format(childNode.weightScore(patientA, patientB)) + "</td>");
-          out.println("<td valign=\"top\"><input type=\"text\" name=\"min_" + childName + "\" size=\"3\" value=\""
-              + childNode.getMinScore() + "\"</td>");
-          out.println("<td valign=\"top\"><input type=\"text\" name=\"max_" + childName + "\" size=\"3\" value=\""
-              + childNode.getMaxScore() + "\"</td>");
+          out.println("<td valign=\"top\">" + df.format(childNode.weightScore(patientA, patientB))
+              + "</td>");
+          out.println("<td valign=\"top\"><input type=\"text\" name=\"min_" + childName
+              + "\" size=\"3\" value=\"" + childNode.getMinScore() + "\"</td>");
+          out.println("<td valign=\"top\"><input type=\"text\" name=\"max_" + childName
+              + "\" size=\"3\" value=\"" + childNode.getMaxScore() + "\"</td>");
           out.println("" + printScore(childNode.score(patientA, patientB)) + "</td>");
           printAggregateNode(out, patientA, patientB, childNode, childName);
         } else {
@@ -268,7 +268,8 @@ public class MatchPatientServlet extends HomeServlet
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     doGet(req, resp);
   }
 }

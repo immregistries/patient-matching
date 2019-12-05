@@ -7,13 +7,11 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.openimmunizationsoftware.pm.Island;
 import org.openimmunizationsoftware.pm.matchers.AggregateMatchNode;
 import org.openimmunizationsoftware.pm.matchers.MatchNode;
@@ -33,14 +31,14 @@ import org.openimmunizationsoftware.pm.model.World;
  * @author Nathan Bunker
  * 
  */
-public class GenerateWeightsServlet extends HomeServlet
-{
+public class GenerateWeightsServlet extends HomeServlet {
   public static final String POSSIBLE_MATCH = "Possible Match";
   public static final String NOT_A_MATCH = "Not a Match";
   public static final String MATCH = "Match";
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     resp.setContentType("text/html");
     PrintWriter out = new PrintWriter(resp.getOutputStream());
     HttpSession session = req.getSession(true);
@@ -54,11 +52,7 @@ public class GenerateWeightsServlet extends HomeServlet
         }
       }
 
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Generate Weights</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
+      HomeServlet.doHeader(out, user, null);
       out.println("    <script>");
       out.println("      function toggleLayer(whichLayer) ");
       out.println("      {");
@@ -70,14 +64,14 @@ public class GenerateWeightsServlet extends HomeServlet
       out.println("        else if (document.layers) ");
       out.println("          elem = document.layers[whichLayer]");
       out.println("        vis = elem.style;");
-      out.println("        if (vis.display == '' && elem.offsetWidth != undefined && elem.offsetHeight != undefined) ");
-      out.println("          vis.display = (elem.offsetWidth != 0 && elem.offsetHeight != 0) ? 'block' : 'none';");
-      out.println("        vis.display = (vis.display == '' || vis.display == 'block') ? 'none' : 'block';");
+      out.println(
+          "        if (vis.display == '' && elem.offsetWidth != undefined && elem.offsetHeight != undefined) ");
+      out.println(
+          "          vis.display = (elem.offsetWidth != 0 && elem.offsetHeight != 0) ? 'block' : 'none';");
+      out.println(
+          "        vis.display = (vis.display == '' || vis.display == 'block') ? 'none' : 'block';");
       out.println("      }");
       out.println("    </script>");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user);
       out.println("    <h1>Generate Weights</h1>");
 
       out.println("    <form action=\"GenerateWeightsServlet\" method=\"POST\"> ");
@@ -88,28 +82,30 @@ public class GenerateWeightsServlet extends HomeServlet
         for (int j = 0; j < 3; j++) {
           if (req.getParameter("" + i + j) != null) {
             int paramValue = Integer.parseInt(req.getParameter("" + i + j));
-            if (paramValue != weights[i][j])
-            {
+            if (paramValue != weights[i][j]) {
               weightsChanged = true;
             }
             weights[i][j] = paramValue;
           }
         }
       }
-      out.println("      <tr><th>&nbsp;</th><th>Matched</th><th>Possible</th><th>Not Matched</th></tr>");
-      out.println("      <tr><th>Should Match    </th><td><input type=\"text\" name=\"00\" value=\"" + weights[0][0]
-          + "\"></td><td><input type=\"text\" name=\"01\" value=\"" + weights[0][1]
+      out.println(
+          "      <tr><th>&nbsp;</th><th>Matched</th><th>Possible</th><th>Not Matched</th></tr>");
+      out.println("      <tr><th>Should Match    </th><td><input type=\"text\" name=\"00\" value=\""
+          + weights[0][0] + "\"></td><td><input type=\"text\" name=\"01\" value=\"" + weights[0][1]
           + "\"><td><input type=\"text\" name=\"02\" value=\"" + weights[0][2] + "\"></td></td>");
-      out.println("      <tr><th>Should Possible </th><td><input type=\"text\" name=\"10\" value=\"" + weights[1][0]
-          + "\"></td><td><input type=\"text\" name=\"11\" value=\"" + weights[1][1]
+      out.println("      <tr><th>Should Possible </th><td><input type=\"text\" name=\"10\" value=\""
+          + weights[1][0] + "\"></td><td><input type=\"text\" name=\"11\" value=\"" + weights[1][1]
           + "\"><td><input type=\"text\" name=\"12\" value=\"" + weights[1][2] + "\"></td></td>");
-      out.println("      <tr><th>Should Not Match</th><td><input type=\"text\" name=\"20\" value=\"" + weights[2][0]
-          + "\"></td><td><input type=\"text\" name=\"21\" value=\"" + weights[2][1]
+      out.println("      <tr><th>Should Not Match</th><td><input type=\"text\" name=\"20\" value=\""
+          + weights[2][0] + "\"></td><td><input type=\"text\" name=\"21\" value=\"" + weights[2][1]
           + "\"><td><input type=\"text\" name=\"22\" value=\"" + weights[2][2] + "\"></td></td>");
       out.println("      </tr>");
-      out.println("      <tr><td colspan=\"4\" valign=\"top\">Stop Generator <input type=\"checkbox\" name=\"stop\" value=\"stop\""
-          + (req.getParameter("stop") != null ? " checkded" : "") + "></td></tr>");
-      out.println("      <tr><td colspan=\"4\" align=\"right\"><input type=\"submit\" name=\"submit\" value=\"Refresh\"></td></tr>");
+      out.println(
+          "      <tr><td colspan=\"4\" valign=\"top\">Stop Generator <input type=\"checkbox\" name=\"stop\" value=\"stop\""
+              + (req.getParameter("stop") != null ? " checkded" : "") + "></td></tr>");
+      out.println(
+          "      <tr><td colspan=\"4\" align=\"right\"><input type=\"submit\" name=\"submit\" value=\"Refresh\"></td></tr>");
       out.println("    </table>");
       out.println("    </form>");
       World world = (World) getServletContext().getAttribute("world");
@@ -121,7 +117,8 @@ public class GenerateWeightsServlet extends HomeServlet
         List<MatchItem> matchItemList;
 
         BufferedReader in = null;
-        in = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("MIIS-E2.txt")));
+        in = new BufferedReader(
+            new InputStreamReader(this.getClass().getResourceAsStream("MIIS-E2.txt")));
         if (in != null && req.getParameter("stop") == null) {
           matchItemList = Island.readSourceFile(in);
         } else {
@@ -147,12 +144,15 @@ public class GenerateWeightsServlet extends HomeServlet
       if (creatures != null) {
         out.println("    <br>");
         out.println("    <table border=\"1\" cellspacing=\"0\">");
-        out.println("      <tr><th>Position</th><th>Generation</th><th>Score</th><th>Hash</th></tr>");
+        out.println(
+            "      <tr><th>Position</th><th>Generation</th><th>Score</th><th>Hash</th></tr>");
         for (int i = 0; i < 100 && i < creatures.length; i++) {
           out.println("      <tr>");
-          out.println("        <td><a href=\"javascript:toggleLayer('T" + i + "');\">" + i + "</td>");
+          out.println(
+              "        <td><a href=\"javascript:toggleLayer('T" + i + "');\">" + i + "</td>");
           out.println("        <td>" + creatures[i].getGeneration() + "</td>");
-          out.println("        <td>" + decimalFormat.format((creatures[i].getScore() * 100.0)) + "</td>");
+          out.println(
+              "        <td>" + decimalFormat.format((creatures[i].getScore() * 100.0)) + "</td>");
           out.println("        <td>" + creatures[i].hashCode() + "</td>");
           out.println("      </tr>");
           out.println("      <tr style=\"display:none\" id=\"T" + i + "\">");
@@ -167,29 +167,34 @@ public class GenerateWeightsServlet extends HomeServlet
             {
               out.println("<table border=\"1\" cellspacing=\"0\">");
               out.println("<tr><td valign=\"top\">Match</td>");
-              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), match, "match");
+              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(),
+                  match, "match");
               out.println("    </tr>");
               out.println("<tr><td valign=\"top\">Not a Match</td>");
-              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), notMatch, "notmatch");
+              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(),
+                  notMatch, "notmatch");
               out.println("    </tr>");
               out.println("<tr><td valign=\"top\">Twin</td>");
-              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), twin, "twin");
+              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(),
+                  twin, "twin");
               out.println("    </tr>");
               out.println("<tr><td valign=\"top\">Missing</td>");
-              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(), missing, "missing");
+              printAggregateNode(out, patientCompare.getPatientA(), patientCompare.getPatientB(),
+                  missing, "missing");
               out.println("    </tr>");
               out.println("    </table>");
               out.println("    <br>");
               Scorer scorer = creatures[i].getScorer();
               out.println("    <table border=\"1\" cellspacing=\"0\">");
-              out.println("      <tr><th>&nbsp;</th><th>Matched</th><th>Possible</th><th>Not Matched</th></tr>");
+              out.println(
+                  "      <tr><th>&nbsp;</th><th>Matched</th><th>Possible</th><th>Not Matched</th></tr>");
               int[][] c = scorer.getCountTable();
-              out.println("      <tr><th>Should Match</th><td>" + c[0][0] + "</td><td>" + c[0][1] + "<td>" + c[0][2]
-                  + "</td></td>");
-              out.println("      <tr><th>Should Possible</th><td>" + c[1][0] + "</td><td>" + c[1][1] + "<td>" + c[1][2]
-                  + "</td></td>");
-              out.println("      <tr><th>Should Not Match</th><td>" + c[2][0] + "</td><td>" + c[2][1] + "<td>"
-                  + c[2][2] + "</td></td>");
+              out.println("      <tr><th>Should Match</th><td>" + c[0][0] + "</td><td>" + c[0][1]
+                  + "<td>" + c[0][2] + "</td></td>");
+              out.println("      <tr><th>Should Possible</th><td>" + c[1][0] + "</td><td>" + c[1][1]
+                  + "<td>" + c[1][2] + "</td></td>");
+              out.println("      <tr><th>Should Not Match</th><td>" + c[2][0] + "</td><td>"
+                  + c[2][1] + "<td>" + c[2][2] + "</td></td>");
               out.println("      </tr>");
               out.println("    </table>");
 
@@ -201,28 +206,31 @@ public class GenerateWeightsServlet extends HomeServlet
         }
       }
       out.println("    </table>");
-      out.println("  </body>");
-      out.println("</html>");
+      HomeServlet.doFooter(out, user);
+
     } catch (Exception e) {
       e.printStackTrace(out);
     }
     out.close();
   }
 
-  protected static void printAggregateNode(PrintWriter out, Patient patientA, Patient patientB, MatchNode node,
-      String name) {
+  protected static void printAggregateNode(PrintWriter out, Patient patientA, Patient patientB,
+      MatchNode node, String name) {
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     out.println("<td>");
     if (node instanceof AggregateMatchNode) {
       AggregateMatchNode amNode = (AggregateMatchNode) node;
       out.println("<table border=\"1\" cellspacing=\"0\">");
-      out.println("<tr><th>" + amNode.getMatchName() + "</th><th>Min W</th><th>Max W</th><th>&nbsp;</th></tr>");
+      out.println("<tr><th>" + amNode.getMatchName()
+          + "</th><th>Min W</th><th>Max W</th><th>&nbsp;</th></tr>");
       for (MatchNode childNode : amNode.getMatchNodeList()) {
         String childName = name + "." + childNode.getMatchName();
         out.println("<tr>");
         out.println("<td valign=\"top\">" + childNode.getMatchName() + "</td>");
-        out.println("<td valign=\"top\">" + decimalFormat.format(childNode.getMinScore()) + "</td>");
-        out.println("<td valign=\"top\">" + decimalFormat.format(childNode.getMaxScore()) + "</td>");
+        out.println(
+            "<td valign=\"top\">" + decimalFormat.format(childNode.getMinScore()) + "</td>");
+        out.println(
+            "<td valign=\"top\">" + decimalFormat.format(childNode.getMaxScore()) + "</td>");
         printAggregateNode(out, patientA, patientB, childNode, childName);
         out.println("</tr>");
       }
@@ -234,7 +242,8 @@ public class GenerateWeightsServlet extends HomeServlet
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     // TODO Auto-generated method stub
     doGet(req, resp);
   }

@@ -69,11 +69,7 @@ public class ConvertDataServlet extends HomeServlet
     HttpSession session = request.getSession(true);
     User user = (User) session.getAttribute(TestSetServlet.ATTRIBUTE_USER);
     try {
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Convert Data</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
+      HomeServlet.doHeader(out, user, null);
       out.println("    <script>");
       out.println("      function toggleLayer(whichLayer) ");
       out.println("      {");
@@ -90,9 +86,6 @@ public class ConvertDataServlet extends HomeServlet
       out.println("        vis.display = (vis.display == '' || vis.display == 'block') ? 'none' : 'block';");
       out.println("      }");
       out.println("    </script>");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user);
       out.println("    <h1>Convert Data</h1>");
 
       String data = request.getParameter("data");
@@ -187,8 +180,7 @@ public class ConvertDataServlet extends HomeServlet
       out.println("   <input type=\"submit\" name=\"submit\" value=\"Convert\"/>");
       out.println("    </form>");
 
-      out.println("  </body>");
-      out.println("</html>");
+      HomeServlet.doFooter(out, user);
     } catch (Exception e) {
       out.println("<pre>");
       e.printStackTrace(out);

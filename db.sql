@@ -2,9 +2,9 @@ CREATE DATABASE matching_validation;
 
 use matching_validation;
 
-create user matching_user identified by 'test'
+create user mv_web identified by 'cArn88r0w';
 
-GRANT SELECT, INSERT, DELETE, UPDATE, LOCK TABLES, EXECUTE ON dqa.* TO 'matching_user'@'%';
+GRANT SELECT, INSERT, DELETE, UPDATE, LOCK TABLES, EXECUTE ON matching_validation.* TO 'mv_web'@'%';
 
 
 CREATE TABLE patient

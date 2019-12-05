@@ -79,14 +79,7 @@ public class TestScriptExploreServlet extends HomeServlet
         }
 
       }
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Test Script Explore</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user);
+      HomeServlet.doHeader(out, user, null);
       out.println("    <h1>Test Script Explore</h1>");
       out.println("    <form action=\"TestScriptExploreServlet\" method=\"POST\"> ");
       out.println("    <table>");
@@ -130,8 +123,8 @@ public class TestScriptExploreServlet extends HomeServlet
         out.println("PATIENT B: " + matchItem.getPatientDataB());
       }
       out.println("</pre>");
-      out.println("  </body>");
-      out.println("</html>");
+      HomeServlet.doFooter(out, user);
+
     } catch (Exception e) {
       e.printStackTrace(out);
     }

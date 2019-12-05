@@ -71,16 +71,8 @@ public class WeightSetServlet extends HomeServlet
 
       String action = req.getParameter(PARAM_ACTION);
       
-
-      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> ");
-      out.println("<html>");
-      out.println("  <head>");
-      out.println("    <title>Match Patient</title>");
-      out.println("    <link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" />");
-      out.println("  </head>");
-      out.println("  <body>");
-      makeMenu(out, user, "WeightSetServlet");
-      
+      HomeServlet.doHeader(out, user, null);
+            
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         if (matchSetSelected != null) {
@@ -122,6 +114,8 @@ public class WeightSetServlet extends HomeServlet
         out.println("    </table>");
 
       
+        HomeServlet.doFooter(out, user);
+        
       out.println("  </body>");
       out.println("</html>");
     } catch (Exception e) {
