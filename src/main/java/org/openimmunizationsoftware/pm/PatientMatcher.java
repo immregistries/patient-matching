@@ -31,4 +31,12 @@ public class PatientMatcher {
     }
     return PatientMatchDetermination.NO_MATCH;
   }
+
+  public String generateSignature(Patient patientA, Patient patientB) {
+    PatientCompare patientCompare = new PatientCompare();
+    patientCompare.readScript(matcherConfig);
+    patientCompare.setPatientA(patientA);
+    patientCompare.setPatientB(patientB);
+    return patientCompare.getSignature();
+  }
 }
