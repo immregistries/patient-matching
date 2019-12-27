@@ -4,7 +4,7 @@
 	<groupId>org.openimmunizationsoftware.pm</groupId>
 	<artifactId>patientmatch</artifactId>
 	<packaging>war</packaging>
-	<version>1.6.02</version>
+	<version>1.6.03</version>
 	<!-- TODO project name  -->
 	<name>quickstart</name>
 	<description></description>
