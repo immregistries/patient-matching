@@ -47,7 +47,7 @@ public class TestScriptExploreServlet extends HomeServlet
         MatchItem matchTestCase = null;
 
         BufferedReader in = null;
-        for (String possibleScript : TestMatchingServlet.TEST_SCIPTS) {
+        for (String possibleScript : TestMatchingServlet.TEST_SCRIPTS) {
           if (testScript.equals(possibleScript)) {
             in = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(possibleScript + ".txt")));
             break;
@@ -86,7 +86,7 @@ public class TestScriptExploreServlet extends HomeServlet
       out.println("      <tr>");
       out.println("        <td valign=\"top\">Test Script</td>");
       out.println("        <td><select name=\"testScript\">");
-      for (String possibleScript : TestMatchingServlet.TEST_SCIPTS) {
+      for (String possibleScript : TestMatchingServlet.TEST_SCRIPTS) {
         out.println("          <option value=\"" + possibleScript + "\">" + possibleScript + "</option>");
       }
       out.println("           </select>");

@@ -36,7 +36,7 @@ import org.openimmunizationsoftware.pm.model.User;
  */
 public class TestMatchingServlet extends HomeServlet
 {
-  protected static final String[] TEST_SCIPTS = { "MIIS-B", "MIIS-C", "MIIS-D", "MIIS-E", "MIIS-E2", "MIIS-E3" };
+  protected static final String[] TEST_SCRIPTS = { "MIIS-B", "MIIS-C", "MIIS-D", "MIIS-E", "MIIS-E2", "MIIS-E3", "MIIS-F1", "MIIS-F2" };
 
   public static final String ATTRIBUTE_CREATURE_SCRIPT = "creatureScript";
   public static final String ATTRIBUTE_PATIENT_COMPARE = "patientCompare";
@@ -96,7 +96,7 @@ public class TestMatchingServlet extends HomeServlet
       } else if (!testScript.equals("")) {
         MatchItem matchItem = null;
         BufferedReader in = null;
-        for (String possibleScript : TEST_SCIPTS) {
+        for (String possibleScript : TEST_SCRIPTS) {
           if (testScript.equals(possibleScript)) {
             in = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(possibleScript + ".txt")));
             break;
@@ -135,7 +135,7 @@ public class TestMatchingServlet extends HomeServlet
       if (user == null) {
         out.println("        <td valign=\"top\">Test Script</td>");
         out.println("        <td><select name=\"" + PARAM_TEST_SCRIPT + "\">");
-        for (String possibleScript : TEST_SCIPTS) {
+        for (String possibleScript : TEST_SCRIPTS) {
           out.println("          <option value=\"" + possibleScript + "\">" + possibleScript + "</option>");
         }
         out.println("           </select>");

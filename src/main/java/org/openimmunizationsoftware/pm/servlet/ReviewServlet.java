@@ -37,7 +37,7 @@ import org.openimmunizationsoftware.pm.model.User;
  */
 public class ReviewServlet extends HomeServlet
 {
-  protected static final String[] TEST_SCIPTS = { "MIIS-B", "MIIS-C", "MIIS-D", "MIIS-E", "MIIS-E2", "MIIS-E3" };
+  protected static final String[] TEST_SCIPTS = { "MIIS-B", "MIIS-C", "MIIS-D", "MIIS-E", "MIIS-E2", "MIIS-E3", "MIIS-F1", "MIIS-F2" };
 
   public static final String ATTRIBUTE_SHOULD_NOT_MATCH_BUT_MATCHED = "matchItemListShouldNotMatchButMatched";
   public static final String ATTRIBUTE_SHOULD_NOT_MATCH_BUT_POSSIBLE_MATCHED = "matchItemListShouldNotMatchButPossibleMatched";

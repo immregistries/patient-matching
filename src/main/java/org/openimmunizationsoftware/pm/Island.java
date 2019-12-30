@@ -32,7 +32,7 @@ public class Island
    * <p>
    * 3. Modify and use this command line from the root of the project:
    * <p>
-   * <code>mvn exec:java -Dexec.mainClass="org.openimmunizationsoftware.pm.Island" -Dexec.args="http://localhost:8286/CentralServlet src/main/java/org/openimmunizationsoftware/pm/servlet/MIIS-C.txt"</code>
+   * <code>mvn exec:java -Dexec.mainClass="org.openimmunizationsoftware.pm.Island" -Dexec.args="http://localhost:8286/CentralServlet src/main/java/org/openimmunizationsoftware/pm/servlet/MIIS-F1.txt"</code>
    * 
    * @param args
    * @throws Exception
