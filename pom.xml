@@ -80,9 +80,9 @@
 		</dependency>
 		<!--  mvn install:install-file -Dfile=secondstring-20191126.jar -Dpackaging=jar\ -DgroupId=com.wcohen.ss -DartifactId=secondstring -Dversion=20191126 -->
 		<dependency>
-			<groupId>com.wcohen.ss</groupId>
-			<artifactId>secondstring</artifactId>
-			<version>20191126</version>
+			<groupId>com.wcohen</groupId>
+			<artifactId>com.wcohen.secondstring</artifactId>
+			<version>0.1</version>
 		</dependency>
 
 		<!--  JUNIT DEPENDENCY FOR TESTING -->
