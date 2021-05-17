@@ -8,17 +8,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.wicket.util.file.FileDeleteStrategy;
+import org.apache.commons.io.FileDeleteStrategy;
 import org.apache.wicket.util.file.IFileCleaner;
-import org.apache.wicket.util.upload.DiskFileItemFactory;
-import org.apache.wicket.util.upload.FileItem;
-import org.apache.wicket.util.upload.ServletFileUpload;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -57,39 +52,39 @@ public class TestSetUploadServlet extends TestSetServlet
       }
     };
 
-    DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(fileCleaner);
-    fileItemFactory.setSizeThreshold(100 * 1024 * 1024); // 100 MB
-    File uploadDir = new File(uploadDirString);
-    if (!uploadDir.exists()) {
-      throw new IllegalArgumentException("Upload directory not found, unable to upload");
-    }
-
+    // DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(fileCleaner);
+//    fileItemFactory.setSizeThreshold(100 * 1024 * 1024); // 100 MB
+//    File uploadDir = new File(uploadDirString);
+//    if (!uploadDir.exists()) {
+//      throw new IllegalArgumentException("Upload directory not found, unable to upload");
+//    }
+//
     HttpSession session = req.getSession(true);
     User user = (User) session.getAttribute("user");
     Session dataSession = (Session) session.getAttribute("dataSession");
 
     String dataSource = "";
-    fileItemFactory.setRepository(uploadDir);
-    ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
+//    fileItemFactory.setRepository(uploadDir);
+    // ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
     File file = null;
     MatchSet matchSetSelected = null;
     try {
-      List<FileItem> items = uploadHandler.parseRequest(req);
-      for (FileItem item : items) {
-        /*
-         * Handle Form Fields.
-         */
-        if (item.isFormField()) {
-          if (item.getFieldName().equals(PARAM_DATA_SOURCE)) {
-            dataSource = item.getString();
-          } else if (item.getFieldName().equals(PARAM_MATCH_SET_ID)) {
-            matchSetSelected = (MatchSet) dataSession.get(MatchSet.class, Integer.parseInt(item.getString()));
-          }
-        } else {
-          file = File.createTempFile("upload", ".txt");
-          item.write(file);
-        }
-      }
+//      List<FileItem> items = uploadHandler.parseRequest(req);
+//      for (FileItem item : items) {
+//        /*
+//         * Handle Form Fields.
+//         */
+//        if (item.isFormField()) {
+//          if (item.getFieldName().equals(PARAM_DATA_SOURCE)) {
+//            dataSource = item.getString();
+//          } else if (item.getFieldName().equals(PARAM_MATCH_SET_ID)) {
+//            matchSetSelected = (MatchSet) dataSession.get(MatchSet.class, Integer.parseInt(item.getString()));
+//          }
+//        } else {
+//          file = File.createTempFile("upload", ".txt");
+//          item.write(file);
+//        }
+//      }
     } catch (Exception ex) {
       throw new ServletException("Unable to upload file", ex);
     }
