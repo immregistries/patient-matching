@@ -1,17 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>org.openimmunizationsoftware.pm</groupId>
 	<artifactId>patientmatch</artifactId>
-	<packaging>war</packaging>
 	<version>1.6.03</version>
-	<!-- TODO project name  -->
-	<name>quickstart</name>
-	<description></description>
-	<!--
-		TODO <organization> <name>company name</name> <url>company url</url>
-		</organization>
-	-->
+	<packaging>war</packaging>
+	
+    <name>Patient Matcher</name>
+	<description>A library of patient matching algorithms</description>
+    <url>https://immregistries.org</url>
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -19,6 +18,33 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
+    <developers>
+        <developer>
+            <name>Nathan Bunker</name>
+            <email>nbunker@immregistries.org</email>
+            <organization>AIRA</organization>
+            <organizationUrl>https://immregistries.org</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/immregistries/patient-matching.git</connection>
+        <developerConnection>scm:git:ssh://github.com:immregistries/patient-matching.git</developerConnection>
+        <url>https://github.com/immregistries/patient-matching/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
 	<properties>
 		<wicket.version>7.17.0</wicket.version>
 		<jetty.version>7.5.0.v20110901</jetty.version>
@@ -147,6 +173,31 @@
 					<debug>true</debug>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
