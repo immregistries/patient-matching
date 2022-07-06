@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.immregistries.pm.model">
+  <class name="Patient" table="patient">
+    <id name="patientId" column="patient_id">
+      <generator class="assigned"/>
+    </id>
+    <property name="nameLast" column="last_name" type="string"/>
+    <property name="nameFirst" column="first_name" type="string"/>
+    <property name="birthDate" column="dob" type="string"/>
+    <property name="nameMiddle" column="middle_name" type="string"/>
+    <property name="nameSuffix" column="suffix" type="string"/>
+    <property name="gender" column="sex" type="string"/>
+    <property name="motherMaidenName" column="mom_maiden" type="string"/>
+    <property name="motherNameLast" column="mom_last" type="string"/>
+    <property name="motherNameFirst" column="mom_first" type="string"/>
+    <property name="motherNameMiddle" column="mom_middle" type="string"/>
+    <property name="vacName" column="vac_name" type="string"/>
+    <property name="vacCode" column="vac_code" type="string"/>
+    <property name="vacDate" column="vac_date" type="string"/>
+    <property name="vacMfr" column="vac_mfr" type="string"/>
+    <many-to-one name="linkWith" column="link_with" class="Patient"/>
+  </class>
+</hibernate-mapping>

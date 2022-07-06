@@ -7,27 +7,27 @@
 
 	<servlet>
 		<servlet-name>HomeServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.HomeServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.HomeServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ReviewServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.ReviewServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.ReviewServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>MatchPatientServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.MatchPatientServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.MatchPatientServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>DownloadHL7Servlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.DownloadHL7Servlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.DownloadHL7Servlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TestSetServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.TestSetServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.TestSetServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TestSetUploadServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.TestSetUploadServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.TestSetUploadServlet</servlet-class>
 		<init-param>
             <param-name>uploadDir</param-name>
             <param-value>C:\Users\N. Bunker\Dropbox (Personal)\work\client\MA MIIS\Matching\data-temp</param-value>
@@ -35,19 +35,19 @@
 	</servlet>
 	<servlet>
 		<servlet-name>WeightSetServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.WeightSetServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.WeightSetServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>AddressTestServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.AddressTestServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.AddressTestServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TestScriptExploreServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.TestScriptExploreServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.TestScriptExploreServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>CentralServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.CentralServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.CentralServlet</servlet-class>
 		<init-param>
             <param-name>dataStoreDir</param-name>
             <param-value>C:\Users\N. Bunker\Dropbox (Personal)\work\client\MA MIIS\Matching\data</param-value>
@@ -57,27 +57,27 @@
 	
 	<servlet>
 		<servlet-name>TestMatchingServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.TestMatchingServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.TestMatchingServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>GenerateWeightsServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.GenerateWeightsServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.GenerateWeightsServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>RandomServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.RandomServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.RandomServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>RandomScriptServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.RandomScriptServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.RandomScriptServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>RandomForCDCServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.RandomForCDCServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.RandomForCDCServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ConvertDataServlet</servlet-name>
-		<servlet-class>org.openimmunizationsoftware.pm.servlet.ConvertDataServlet</servlet-class>
+		<servlet-class>org.immregistries.pm.servlet.ConvertDataServlet</servlet-class>
 	</servlet>
 
 
@@ -161,7 +161,7 @@
 		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
 		<init-param>
 			<param-name>applicationClassName</param-name>
-			<param-value>org.openimmunizationsoftware.pm.WicketApplication</param-value>
+			<param-value>org.immregistries.pm.WicketApplication</param-value>
 		</init-param>
 	</filter>
 
