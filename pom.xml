@@ -105,7 +105,7 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.17</version>
         </dependency>
         <!--  mvn install:install-file -Dfile=secondstring-20191126.jar -Dpackaging=jar\ -DgroupId=com.wcohen.ss -DartifactId=secondstring -Dversion=20191126 -->
         <dependency>
