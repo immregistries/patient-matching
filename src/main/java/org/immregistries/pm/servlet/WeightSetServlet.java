@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 import org.immregistries.pm.model.MatchItem;
 import org.immregistries.pm.model.MatchSet;
 import org.immregistries.pm.model.PatientCompare;
@@ -135,7 +135,7 @@ public class WeightSetServlet extends HomeServlet
   public static SessionFactory getSessionFactory() {
     if (factory == null) {
 
-      factory = new AnnotationConfiguration().configure().buildSessionFactory();
+      factory = new Configuration().configure().buildSessionFactory();
 
     }
     return factory;

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 import org.immregistries.pm.model.Patient;
 import org.immregistries.pm.model.User;
 
@@ -97,7 +97,7 @@ public class DownloadHL7Servlet extends HomeServlet
   public static SessionFactory getSessionFactory() {
     if (factory == null) {
 
-      factory = new AnnotationConfiguration().configure().buildSessionFactory();
+      factory = new Configuration().configure().buildSessionFactory();
 
     }
     return factory;
