@@ -46,7 +46,7 @@
     </distributionManagement>
 
     <properties>
-        <wicket.version>7.17.0</wicket.version>
+        <wicket.version>9.11.0</wicket.version>
         <jetty.version>7.5.0.v20110901</jetty.version>
         <gpg.skip>true</gpg.skip>
     </properties>
@@ -57,29 +57,31 @@
             <artifactId>wicket-core</artifactId>
             <version>${wicket.version}</version>
         </dependency>
-        <!-- OPTIONAL DEPENDENCY
-        <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-extensions</artifactId>
-            <version>${wicket.version}</version>
-        </dependency>
-        -->
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.24.Final</version>
+            <version>6.1.1.Final</version>
             <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-            <version>5.6.10.Final</version>
+            <version>4.3.8.Final</version>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.16</version>
+            <version>8.0.29</version>
         </dependency>
 
         <dependency>
@@ -91,7 +93,7 @@
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.18.1-GA</version>
+            <version>3.29.0-GA</version>
         </dependency>
 
         <!-- LOGGING DEPENDENCIES - LOG4J -->
@@ -103,7 +105,7 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.17</version>
         </dependency>
         <!--  mvn install:install-file -Dfile=secondstring-20191126.jar -Dpackaging=jar\ -DgroupId=com.wcohen.ss -DartifactId=secondstring -Dversion=20191126 -->
         <dependency>
@@ -170,7 +172,7 @@
                 <inherited>true</inherited>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.10.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
