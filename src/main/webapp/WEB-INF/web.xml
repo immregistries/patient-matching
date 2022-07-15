@@ -18,8 +18,8 @@
 		<servlet-class>org.immregistries.pm.servlet.MatchPatientServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>DownloadHL7Servlet</servlet-name>
-		<servlet-class>org.immregistries.pm.servlet.DownloadHL7Servlet</servlet-class>
+		<servlet-name>DownloadHl7Servlet</servlet-name>
+		<servlet-class>org.immregistries.pm.servlet.DownloadHl7Servlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TestSetServlet</servlet-name>
@@ -94,8 +94,8 @@
 		<url-pattern>/ReviewServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>DownloadHL7Servlet</servlet-name>
-		<url-pattern>/DownloadHL7Servlet</url-pattern>
+		<servlet-name>DownloadHl7Servlet</servlet-name>
+		<url-pattern>/DownloadHl7Servlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>CentralServlet</servlet-name>
