@@ -21,8 +21,7 @@ import org.immregistries.pm.model.MatchItem;
 import org.immregistries.pm.model.MatchSet;
 import org.immregistries.pm.model.User;
 
-public class TestSetUploadServlet extends TestSetServlet
-{
+public class TestSetUploadServlet extends TestSetServlet {
 
   private static String uploadDirString = "/temp";
 
@@ -33,7 +32,8 @@ public class TestSetUploadServlet extends TestSetServlet
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     IFileCleaner fileCleaner = new IFileCleaner() {
 
       public void track(File file, Object marker, FileDeleteStrategy deleteStrategy) {
@@ -53,38 +53,38 @@ public class TestSetUploadServlet extends TestSetServlet
     };
 
     // DiskFileItemFactory fileItemFactory = new DiskFileItemFactory(fileCleaner);
-//    fileItemFactory.setSizeThreshold(100 * 1024 * 1024); // 100 MB
-//    File uploadDir = new File(uploadDirString);
-//    if (!uploadDir.exists()) {
-//      throw new IllegalArgumentException("Upload directory not found, unable to upload");
-//    }
-//
+    //    fileItemFactory.setSizeThreshold(100 * 1024 * 1024); // 100 MB
+    //    File uploadDir = new File(uploadDirString);
+    //    if (!uploadDir.exists()) {
+    //      throw new IllegalArgumentException("Upload directory not found, unable to upload");
+    //    }
+    //
     HttpSession session = req.getSession(true);
     User user = (User) session.getAttribute("user");
     Session dataSession = (Session) session.getAttribute("dataSession");
 
     String dataSource = "";
-//    fileItemFactory.setRepository(uploadDir);
+    //    fileItemFactory.setRepository(uploadDir);
     // ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
     File file = null;
     MatchSet matchSetSelected = null;
     try {
-//      List<FileItem> items = uploadHandler.parseRequest(req);
-//      for (FileItem item : items) {
-//        /*
-//         * Handle Form Fields.
-//         */
-//        if (item.isFormField()) {
-//          if (item.getFieldName().equals(PARAM_DATA_SOURCE)) {
-//            dataSource = item.getString();
-//          } else if (item.getFieldName().equals(PARAM_MATCH_SET_ID)) {
-//            matchSetSelected = (MatchSet) dataSession.get(MatchSet.class, Integer.parseInt(item.getString()));
-//          }
-//        } else {
-//          file = File.createTempFile("upload", ".txt");
-//          item.write(file);
-//        }
-//      }
+      //      List<FileItem> items = uploadHandler.parseRequest(req);
+      //      for (FileItem item : items) {
+      //        /*
+      //         * Handle Form Fields.
+      //         */
+      //        if (item.isFormField()) {
+      //          if (item.getFieldName().equals(PARAM_DATA_SOURCE)) {
+      //            dataSource = item.getString();
+      //          } else if (item.getFieldName().equals(PARAM_MATCH_SET_ID)) {
+      //            matchSetSelected = (MatchSet) dataSession.get(MatchSet.class, Integer.parseInt(item.getString()));
+      //          }
+      //        } else {
+      //          file = File.createTempFile("upload", ".txt");
+      //          item.write(file);
+      //        }
+      //      }
     } catch (Exception ex) {
       throw new ServletException("Unable to upload file", ex);
     }
@@ -152,10 +152,12 @@ public class TestSetUploadServlet extends TestSetServlet
       transaction.commit();
       message = matchItemList.size() + " match test cases loaded";
     }
-    file.delete();
+    if (file != null) {
+      file.delete();
+    }
 
-    String newUrl = "TestSetServlet?" + PARAM_MATCH_SET_ID + "=" + matchSetSelected.getMatchSetId() + "&"
-        + PARAM_MESSAGE + "=" + URLEncoder.encode(message, "UTF-8");
+    String newUrl = "TestSetServlet?" + PARAM_MATCH_SET_ID + "=" + matchSetSelected.getMatchSetId()
+        + "&" + PARAM_MESSAGE + "=" + URLEncoder.encode(message, "UTF-8");
     resp.sendRedirect(newUrl);
   }
 
